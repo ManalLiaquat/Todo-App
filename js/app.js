@@ -110,7 +110,6 @@ function add(userInp, savedOrNot = 0, itemID = 0) {
         alert("Please! Enter something in input bar...");
     }
 
-
 }
 
 function checkSavedToDos(){

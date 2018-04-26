@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <title>ToDo App</title>
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <title>ToDo App</title>
+        <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyAH24oE91EfPlB1u4fIRMbaq_T48fgJ-kY",
+                authDomain: "manal-liaquat.firebaseapp.com",
+                databaseURL: "https://manal-liaquat.firebaseio.com",
+                projectId: "manal-liaquat",
+                storageBucket: "manal-liaquat.appspot.com",
+                messagingSenderId: "174271760047"
+            };
+            firebase.initializeApp(config);
+            
+            </script>
 </head>
 
 <body id="body">
@@ -18,20 +32,21 @@
             <h1>TO DO APP
                 <i class="fa fa-clipboard"></i>
             </h1>
-                <div class="bg-info row" id="adding">
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" style="display:inline;" size="50" name="" id="val" placeholder="Enter a todo item...">
-                    </div>
-                    <div class="col-sm-2"><!-- class="input-group-append" -->
-                        <button onclick="add();" id="btn1" class="btn btn-dark">
-                            <i class="fa fa-plus"></i> Add
-                        </button>
-
-                        <button onclick="deleteAll();" class="btn btn-warning float-right" id="btn2">
-                            <i class="fa fa-trash"></i> DELETE ALL</button>
+            <div class="bg-info row" id="adding">
+                <div class="col-sm-10">
+                    <input type="text" autofocus class="form-control" style="display:inline;" size="50" name="" id="val" placeholder="Enter a todo item...">
+                </div>
+                <div class="col-sm-2">
+                    <!-- class="input-group-append" -->
+                    <button onclick="add();" id="btn1" class="btn btn-dark">
+                        <i class="fa fa-plus"></i> Add
+                    </button>
+                    
+                    <button onclick="deleteAll();" class="btn btn-warning float-right" id="btn2">
+                        <i class="fa fa-trash"></i> DELETE ALL</button>
                     </div>
                 </div>
-
+                
             <br>
         </div>
         <div class="container-fluid bg-success text-white" id="addedTasks">
@@ -43,7 +58,7 @@
                         </h3>
                         <hr width="70%">
                         <ul id="incompleteList">
-
+                            
                         </ul>
                     </div>
                 </div>
@@ -54,27 +69,24 @@
                         </h3>
                         <hr width="70%">
                         <ul id="completedlist">
-
+                            
                         </ul>
                     </div>
                 </div>
             </div>
             
         </div>
-
-        <div id="time"></div>
+        
+        <strong>
+            <div class="text-danger" id="time"></div>
+        </strong>
     </div>
     <!-- End of Todo App  -->
     <!-- Start of Clock -->
-
+    
     <!-- End of clock -->
-</body>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
-<script src="js/todo.js"></script>
+</body> 
+<!-- <script src="js/todo.js"></script> -->
+<script src="js/app.js"></script>
 
 </html>

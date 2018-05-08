@@ -47,27 +47,28 @@ function add(userInp, savedOrNot = 0, itemID = 0) {
                 
                 var span = document.createElement("SPAN");
                 span.innerHTML= item;
+                span.setAttribute("class", "col-xs-6");
 
                 
                 var btn = document.createElement("BUTTON");
-                btn.setAttribute("class", "btn btn-danger col-xs-2");
+                btn.setAttribute("class", "btn btn-danger col-sm-2");
                 var btnText = document.createTextNode("Delete");
                 btn.appendChild(btnText);
                 
-                // var btn1 = document.createElement("BUTTON");
-                // btn1.setAttribute("class", "btn btn-info col-xs-2");
-                // var btn1Text = document.createTextNode("Edit");
-                // btn1.appendChild(btn1Text);
+                var btn1 = document.createElement("BUTTON");
+                btn1.setAttribute("class", "btn btn-info col-sm-2");
+                var btn1Text = document.createTextNode("Edit");
+                btn1.appendChild(btn1Text);
                 
                 var checkbox = document.createElement("INPUT");
                 checkbox.setAttribute("type", "checkbox");
-                checkbox.className = "col-sm-2 float-left";
+                checkbox.className = "col-xs-2 float-left";
                 
                 
                 li.appendChild(checkbox);
                 li.appendChild(span);
                 li.appendChild(btn);
-                // li.appendChild(btn1);
+                li.appendChild(btn1);
                 incompleteList.appendChild(li);
 
                 userInput.value = "";
@@ -84,7 +85,7 @@ function add(userInp, savedOrNot = 0, itemID = 0) {
                 
                 checkbox.onclick = function() {
                     li.removeChild(checkbox);
-                    // li.removeChild(btn1);
+                    li.removeChild(btn1);
                     completedList.appendChild(li);
                     incompleteList.removeChild(li);
                 };
@@ -95,14 +96,14 @@ function add(userInp, savedOrNot = 0, itemID = 0) {
                     ul.removeChild(li);
                 };
                 
-                // btn1.onclick = function() {
-                //     var li = this.parentNode;
-                //     var text = prompt("Enter updated value");
-                //     span.innerHTML = text;
-                //     li.appendChild(checkbox);
-                //     li.appendChild(btn);
-                //     li.appendChild(btn1);
-                // };
+                btn1.onclick = function() {
+                    var li = this.parentNode;
+                    var text = prompt("Enter new value");
+                    span.innerHTML = text;
+                    li.appendChild(checkbox);
+                    li.appendChild(btn);
+                    li.appendChild(btn1);
+                };
                 
             } 
             
@@ -118,7 +119,7 @@ function checkSavedToDos(){
         data.forEach(function(itemData) {
           var itemID = itemData.key;
           var childID = itemData.val();
-          add   (childID, "saved", itemID);
+          add(childID, "saved", itemID);
         });
       });
 
@@ -134,6 +135,8 @@ function deleteAll() {
     document.getElementById("completedlist").innerHTML = "";
 }
 //End of todo app coding
+
+
 
 //start of clock
 var myVar = setInterval(myTimer, 1000);

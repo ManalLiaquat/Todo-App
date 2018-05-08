@@ -12,13 +12,25 @@
     box-shadow: 1px 1px 5px 1px black;
 }
 
+ul{
+    margin: 0
+}
+
 ul li{
     list-style-type: none;
     width: 100%;
+    margin-bottom: 100px;
     text-align: left;
+    padding: 10px;
+    border: thin dashed black;
 }
-button.btn-danger{
-    margin-left: 90%;
+li span{
+    margin-left: 10px;
+}
+button.btn-danger, button.btn-info{
+    float: right;
+    position: static !important;
+    direction: unset
 }
 
 input[type="checkbox"]{
@@ -26,9 +38,8 @@ input[type="checkbox"]{
 }
 
 #addedTasks{
-    padding: 50px;
+    padding: 10px;
     border-radius: 5px;
     min-height: 520px;
     box-shadow: 1px 1px 5px 0.5px black;
-    
 }

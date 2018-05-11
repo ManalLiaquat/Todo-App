@@ -3,6 +3,7 @@ var cacheName = 'Todo App';
 var filesToCache = [
     '/',
     '../index.html',
+    '../app.html',    
     '../css/style.css'
 ];
 self.addEventListener('install', function (e) {

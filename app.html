@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="icon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="manifest" href="manifest.json">
+    <title>ToDo App</title>
+    
+</head>
+
+<body id="body">
+    <!-- Start of todo app -->
+    <div class="container-fluid text-center">
+        <div class="container-fluid">
+            <h1>TO DO APP
+                <i class="fa fa-clipboard"></i>
+                
+                <a class="btn btn-xs btn-secondary pull-right" href="#" role="button" id="logoutBtn" onclick="logOut()">LOG OUT</a>
+                <a class="btn btn-xs btn-primary pull-right" href="index.html" role="button" style="display: none;" id="loginBtn">LOG IN</a>
+            </h1>
+            <div class="bg-info row" id="adding">
+                <div class="col-sm-10">
+                    <input type="text" autofocus class="form-control" style="display:inline;" size="50" name="" id="val" placeholder="Enter a todo item...">
+                </div>
+                <div class="col-sm-2">
+                    <!-- class="input-group-append" -->
+                    <button onclick="add();" id="btn1" class="btn btn-dark">
+                        <i class="fa fa-plus"></i> Add
+                    </button>
+
+                    <button onclick="deleteAll();" class="btn btn-warning float-right" id="btn2">
+                        <i class="fa fa-trash"></i> DELETE ALL</button>
+                </div>
+            </div>
+
+            <br>
+        </div>
+        <div class="container-fluid bg-success text-white" id="addedTasks">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div id="incomplete">
+                        <h3>InComplete Tasks
+                            <i class="fa fa-thumb-tack"></i>
+                        </h3>
+                        <hr width="70%">
+                        <ul id="incompleteList">
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div id="completed">
+                        <h3>Completed Tasks
+                            <i class="fa fa-check-square-o"></i>
+                        </h3>
+                        <hr width="70%">
+                        <ul id="completedlist">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('js/serviceWorker.js')
+                    .then(function () {
+                        console.log('Service Worker Registered');
+                    });
+            }
+        </script>
+
+        <!-- Start of Clock -->
+        <strong>
+            <div class="text-danger" id="time"></div>
+        </strong>
+        <!-- End of clock -->
+    </div>
+    <!-- End of Todo App  -->
+<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyAH24oE91EfPlB1u4fIRMbaq_T48fgJ-kY",
+        authDomain: "manal-liaquat.firebaseapp.com",
+        databaseURL: "https://manal-liaquat.firebaseio.com",
+        projectId: "manal-liaquat",
+        storageBucket: "manal-liaquat.appspot.com",
+        messagingSenderId: "174271760047"
+    };
+    firebase.initializeApp(config);
+</script>
+<script src="js/app.js"></script>
+</body>
+<!-- <script src="js/todo.js"></script> -->
+
+</html>

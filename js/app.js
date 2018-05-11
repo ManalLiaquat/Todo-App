@@ -1,3 +1,18 @@
+function logOut() {
+    firebase.auth().signOut()
+        .then(function (resolve) {
+            window.location.replace("index.html");
+            console.log("Succesfully Signed-Out", resolve);
+        })
+        .catch(function (err) {
+            console.log("Error", err);
+        })
+}
+
+
+
+
+
 
 checkSavedToDos();
 
@@ -20,7 +35,7 @@ let i = 1;
 function add(userInp, savedOrNot = 0, itemID = 0) {
     var item; // todo item
 
-    if(savedOrNot!=0){
+    if (savedOrNot != 0) {
         item = userInp;
     }
     else {
@@ -28,109 +43,138 @@ function add(userInp, savedOrNot = 0, itemID = 0) {
     }
 
     if (item) {
-                if (!(savedOrNot === "saved")) firebase
-                    .database()
-                    .ref("/ToDo App")
-                    .child("ToDo" + i)
-                    .set(item);
+        var uid = firebase.auth().currentUser.uid;
+        var itemObj={
+            todo: item,
+            uid: uid
+        };
+        if (!(savedOrNot === "saved")) firebase
+            .database()
+            .ref("/ToDo App/App Data")
+            .push(itemObj);
 
-                if (!itemID) {
-                  itemID = "ToDo" + i;
-                }
+        if (!itemID) {
+            itemID = "ToDo" + i;
+        }
 
-                i++;
+        i++;
 
-                var incompleteList = document.getElementById("incompleteList");
-                var completedList = document.getElementById("completedlist");
-                
-                var li = document.createElement("LI");
-                
-                var span = document.createElement("SPAN");
-                span.innerHTML= item;
-                span.setAttribute("class", "col-xs-6");
+        var incompleteList = document.getElementById("incompleteList");
+        var completedList = document.getElementById("completedlist");
 
-                
-                var btn = document.createElement("BUTTON");
-                btn.setAttribute("class", "btn btn-danger col-sm-2");
-                var btnText = document.createTextNode("Delete");
-                btn.appendChild(btnText);
-                
-                var btn1 = document.createElement("BUTTON");
-                btn1.setAttribute("class", "btn btn-info col-sm-2");
-                var btn1Text = document.createTextNode("Edit");
-                btn1.appendChild(btn1Text);
-                
-                var checkbox = document.createElement("INPUT");
-                checkbox.setAttribute("type", "checkbox");
-                checkbox.className = "col-xs-2 float-left";
-                
-                
-                li.appendChild(checkbox);
-                li.appendChild(span);
-                li.appendChild(btn);
-                li.appendChild(btn1);
-                incompleteList.appendChild(li);
+        var li = document.createElement("LI");
 
-                userInput.value = "";
-                
-                btn.addEventListener("click", () => { // removing a item from database + DOM
-                    firebase
-                    .database()
-                    .ref("/ToDo App")
-                    .child(itemID)
-                    .remove();
-                
-                    incompleteList.removeChild(btn.parentNode);
-                });
-                
-                checkbox.onclick = function() {
-                    li.removeChild(checkbox);
-                    li.removeChild(btn1);
-                    completedList.appendChild(li);
-                    incompleteList.removeChild(li);
-                };
-                
-                btn.onclick = function() {
-                    var li = this.parentNode;
-                    var ul = li.parentNode;
-                    ul.removeChild(li);
-                };
-                
-                btn1.onclick = function() {
-                    var li = this.parentNode;
-                    var text = prompt("Enter new value");
-                    span.innerHTML = text;
-                    li.appendChild(checkbox);
-                    li.appendChild(btn);
-                    li.appendChild(btn1);
-                };
-                
-            } 
-            
-            else {
-        alert("Please! Enter something in input bar...");
+        var span = document.createElement("SPAN");
+        span.innerHTML = item;
+        span.setAttribute("class", "col-xs-6");
+
+
+        var btn = document.createElement("BUTTON");
+        btn.setAttribute("class", "btn btn-danger col-sm-2");
+        var btnText = document.createTextNode("Delete");
+        btn.appendChild(btnText);
+
+        var btn1 = document.createElement("BUTTON");
+        btn1.setAttribute("class", "btn btn-info col-sm-2");
+        var btn1Text = document.createTextNode("Edit");
+        btn1.appendChild(btn1Text);
+
+        var checkbox = document.createElement("INPUT");
+        checkbox.setAttribute("type", "checkbox");
+        checkbox.className = "col-xs-2 float-left";
+
+
+        li.appendChild(checkbox);
+        li.appendChild(span);
+        li.appendChild(btn);
+        li.appendChild(btn1);
+        incompleteList.appendChild(li);
+
+        userInput.value = "";
+
+        btn.addEventListener("click", () => { // removing a item from database + DOM
+            firebase
+                .database()
+                .ref("/ToDo App/App Data")
+                .child(itemID)
+                .remove();
+
+            incompleteList.removeChild(btn.parentNode);
+        });
+
+        checkbox.onclick = function () {
+            li.removeChild(checkbox);
+            li.removeChild(btn1);
+            completedList.appendChild(li);
+            incompleteList.removeChild(li);
+        };
+
+        btn.onclick = function () {
+            var li = this.parentNode;
+            var ul = li.parentNode;
+            ul.removeChild(li);
+        };
+
+        btn1.onclick = function () {
+            var li = this.parentNode;
+            var text = prompt("Enter new value");
+            span.innerHTML = text;
+            li.appendChild(checkbox);
+            li.appendChild(btn);
+            li.appendChild(btn1);
+        };
+
+    }
+
+    else {
+        console.log("Please! Enter something in input bar...");
     }
 
 }
 
-function checkSavedToDos(){
+function checkSavedToDos() {
 
-    firebase.database().ref("/ToDo App").once('value', function(data) {
-        data.forEach(function(itemData) {
-          var itemID = itemData.key;
-          var childID = itemData.val();
-          add(childID, "saved", itemID);
+    firebase.database().ref("/ToDo App/App Data").once("value").then(function (data) {
+        var itemID;
+        data.forEach(function (itemData) {
+            itemID = itemData.key;
         });
-      });
+        console.log(itemID);
+        
+        var currentUID = firebase.auth().currentUser.uid;
+        var postObject = data.val();
+        console.log(postObject);
+        var keys = Object.keys(postObject);
+        for (var i = 0; i < keys.length; i++) {
+            var currentObj = postObject[keys[i]];
+            if (currentUID === currentObj.uid){
+                var childID = currentObj.todo;
+            }
+            add(childID,"saved",itemID);
+        }
+    })
 
 }
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        var uid = user.uid;
+        console.log(uid);
+    } else {
+        document.getElementById("logoutBtn").style.display = "none";
+        document.getElementById("loginBtn").style.display = "inline";
+        console.log("Please login to see your todos");
+        console.log("User is signed out.\nPlease login!");
+    }
+
+});
+
 
 function deleteAll() {
     alert("Are you sure?");
     firebase
-      .database()
-      .ref("/ToDo App")
-      .remove();
+        .database()
+        .ref("/ToDo App/App Data")
+        .remove();
     document.getElementById("incompleteList").innerHTML = "";
     document.getElementById("completedlist").innerHTML = "";
 }

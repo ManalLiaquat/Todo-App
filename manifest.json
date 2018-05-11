@@ -28,7 +28,7 @@
             "type": "image/png"
         }
     ],
-    "start_url": "index.html",
+    "start_url": "app.html",
     "gcm_sender_id": "103953800507",
     "display": "standalone",
     "background_color": "#FF9800",

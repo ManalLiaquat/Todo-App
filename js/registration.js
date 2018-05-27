@@ -1,3 +1,5 @@
+var msg = document.querySelector("#msg");
+
 function register() {
     var name = document.getElementById("name");
     var number = document.getElementById("number");
@@ -10,7 +12,7 @@ function register() {
         password.value === "" &&
         number.value === ""
     ) {
-        alert("Please fill the form first");
+        msg.innerHTML = "Please fill the form first";
     }
 
     firebase
@@ -37,7 +39,7 @@ function register() {
                 number.value = "";
                 email.value = "";
                 password.value = "";
-                alert("You are signed in successfully");
+                msg.innerHTML = "You are signed in successfully";
             }, 1000);
         })
         .catch(function (error) {
@@ -50,7 +52,7 @@ function register() {
                     number.value === ""
                 )
             ) {
-                alert(error.message)
+                msg.innerHTML = error.message;
             }
         });
 
@@ -64,7 +66,7 @@ function login() {
         .auth()
         .signInWithEmailAndPassword(userEmail.value, userPass.value)
         .then(function (result) {
-            alert("You're logged in successfully");
+            msg.innerHTML = "You're logged in successfully";
 
             console.log(result.uid);
             setTimeout(() => {
@@ -73,7 +75,7 @@ function login() {
         })
         .catch(function (error) {
             console.log(error);
-            alert(error.message);
+            msg.innerHTML = error.message;
         });
 }
 

@@ -9,11 +9,6 @@ function logOut() {
         })
 }
 
-
-
-
-
-
 checkSavedToDos();
 
 const userInput = document.getElementById("val");

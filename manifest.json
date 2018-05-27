@@ -1,36 +1,31 @@
 {
-    "name": "Todo App",
+    "name": "Todo App by Manal Liaquat",
     "short_name": "Todo App",
-    "icons": [
-        {
-            "src": "icon/app-icon.png",
-            "sizes": "128x128",
-            "type": "image/png"
-        },
-        {
-            "src": "icon/app-icon.png",
-            "sizes": "144x144",
-            "type": "image/png"
-        },
-        {
-            "src": "icon/app-icon.png",
-            "sizes": "152x152",
-            "type": "image/png"
-        },
-        {
-            "src": "icon/app-icon.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "icon/app-icon.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
+    "icons": [{
+        "src": "icon/app-icon.png",
+        "sizes": "128x128",
+        "type": "image/png"
+    }, {
+        "src": "icon/app-icon.png",
+        "sizes": "144x144",
+        "type": "image/png"
+    }, {
+        "src": "icon/app-icon.png",
+        "sizes": "152x152",
+        "type": "image/png"
+    }, {
+        "src": "icon/app-icon.png",
+        "sizes": "192x192",
+        "type": "image/png"
+    }, {
+        "src": "icon/app-icon.png",
+        "sizes": "512x512",
+        "type": "image/png"
+    }
     ],
     "start_url": "app.html",
     "gcm_sender_id": "103953800507",
     "display": "standalone",
-    "background_color": "#FF9800",
-    "theme_color": "#FF9800"
-}
+    "background_color": "white",
+    "theme_color": "#218A745"
+    }

@@ -11,6 +11,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="manifest" href="manifest.json">
     <title>ToDo App</title>
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyAH24oE91EfPlB1u4fIRMbaq_T48fgJ-kY",
+        authDomain: "manal-liaquat.firebaseapp.com",
+        databaseURL: "https://manal-liaquat.firebaseio.com",
+        projectId: "manal-liaquat",
+        storageBucket: "manal-liaquat.appspot.com",
+        messagingSenderId: "174271760047"
+    };
+    firebase.initializeApp(config);
+</script>
+
     
 </head>
 
@@ -21,9 +35,10 @@
             <h1>TO DO APP
                 <i class="fa fa-clipboard"></i>
                 
-                <a class="btn btn-xs btn-secondary pull-right" href="#" role="button" id="logoutBtn" onclick="logOut()">LOG OUT</a>
-                <a class="btn btn-xs btn-primary pull-right" href="index.html" role="button" style="display: none;" id="loginBtn">LOG IN</a>
+                <a class="btn btn-xs btn-secondary pull-right" href="#" role="button" id="logoutBtn" onclick="logOut()"><i class="fa fa-sign-out"></i>&ThickSpace; LOG OUT</a>
+                <a class="btn btn-xs btn-primary pull-right" href="index.html" role="button" style="display: none;" id="loginBtn"><i class="fa fa-sign-in"></i>&ThickSpace; LOG IN</a>
             </h1>
+            <br>
             <div class="bg-info row" id="adding">
                 <div class="col-sm-10">
                     <input type="text" autofocus class="form-control" style="display:inline;" size="50" name="" id="val" placeholder="Enter a todo item...">
@@ -68,15 +83,7 @@
             </div>
 
         </div>
-        <script>
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('js/serviceWorker.js')
-                    .then(function () {
-                        console.log('Service Worker Registered');
-                    });
-            }
-        </script>
-
+        
         <!-- Start of Clock -->
         <strong>
             <div class="text-danger" id="time"></div>
@@ -84,21 +91,9 @@
         <!-- End of clock -->
     </div>
     <!-- End of Todo App  -->
-<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
-<script>
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyAH24oE91EfPlB1u4fIRMbaq_T48fgJ-kY",
-        authDomain: "manal-liaquat.firebaseapp.com",
-        databaseURL: "https://manal-liaquat.firebaseio.com",
-        projectId: "manal-liaquat",
-        storageBucket: "manal-liaquat.appspot.com",
-        messagingSenderId: "174271760047"
-    };
-    firebase.initializeApp(config);
-</script>
-<script src="js/app.js"></script>
+    
+    <script src="js/app.js"></script>
+    
 </body>
-<!-- <script src="js/todo.js"></script> -->
 
 </html>

@@ -9,6 +9,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="manifest" href="manifest.json">
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAH24oE91EfPlB1u4fIRMbaq_T48fgJ-kY",
+            authDomain: "manal-liaquat.firebaseapp.com",
+            databaseURL: "https://manal-liaquat.firebaseio.com",
+            projectId: "manal-liaquat",
+            storageBucket: "manal-liaquat.appspot.com",
+            messagingSenderId: "174271760047"
+        };
+        firebase.initializeApp(config);
+    </script>
     <style>
         body {
             background-image: url(https://manal-liaquat.firebaseapp.com/Git%20Projects/Quiz-Application/img/bg.jpg);
@@ -23,8 +36,11 @@
 <body id="body">
     <div class="container">
 
+
         <div class="row">
+            <button type="button" class="btn btn-block btn-danger pull-right" onclick="window.location = 'app.html'">Open App</button>
             <div class="col-md-12">
+                <hr>
                 <h1 class="text-center ">REGISTRATION</h1>
                 <br>
                 <div class="row">
@@ -51,6 +67,7 @@
                 <button class="btn btn-primary mb-2 btn-lg btn-block" onclick="register();">
                     <i class="fa fa-database"></i> SignUp</button>
             </div>
+            <h5 class="text-center" id="msg"></h5>
             <div class="col-md-12">
                 <h1 class="text-center">
                     <br>LOG IN</h1>
@@ -68,7 +85,7 @@
                 <br>
                 <button class="btn btn-success btn-lg btn-block" onclick="login();">
                     <i class="fa fa-sign-in"></i> Login</button>
-                <br>
+                <hr>                
             </div>
 
         </div>
@@ -76,24 +93,11 @@
 
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('js/serviceWorker.js')
+            navigator.serviceWorker.register('sw.js')
                 .then(function () {
                     console.log('Service Worker Registered');
                 });
         }
-    </script>
-    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyAH24oE91EfPlB1u4fIRMbaq_T48fgJ-kY",
-            authDomain: "manal-liaquat.firebaseapp.com",
-            databaseURL: "https://manal-liaquat.firebaseio.com",
-            projectId: "manal-liaquat",
-            storageBucket: "manal-liaquat.appspot.com",
-            messagingSenderId: "174271760047"
-        };
-        firebase.initializeApp(config);
     </script>
     <script src="js/registration.js"></script>
 </body>

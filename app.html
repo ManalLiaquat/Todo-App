@@ -10,6 +10,7 @@
     <link rel="shortcut icon" href="icon/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="manifest" href="manifest.json">
     <title>ToDo App</title>
     <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
@@ -47,30 +48,18 @@
                 <i class="fa fa-sign-in"></i>&ThickSpace; LOG IN</a>
         </div>
     </nav>
-    <div class="container-fluid text-center">
-        <!-- <div class="container-fluid">
-            <h1>TO DO APP
-                <i class="fa fa-clipboard"></i>
-
-                <a class="btn btn-xs btn-secondary pull-right" href="#" role="button" id="logoutBtn" onclick="logOut()">
-                    <i class="fa fa-sign-out"></i>&ThickSpace; LOG OUT</a>
-                <a class="btn btn-xs btn-primary pull-right" href="index.html" role="button" style="display: none;" id="loginBtn">
-                    <i class="fa fa-sign-in"></i>&ThickSpace; LOG IN</a>
-            </h1>
-            <br>
-        </div> -->
+    <div class="text-center">
         <div class="container">
-
             <div class="bg-info row" id="adding">
                 <div class="col-sm-12">
-                    <input type="text" autofocus class="form-control" style="display:inline;" size="50" name="" id="val" placeholder="Enter a todo item...">
+                    <input type="text" autofocus class="form-control" style="display:inline;" name="" id="val" placeholder="Enter a todo item...">
                 </div>
                 <div class="container-fluid" style="padding: 5px 5px 5px 15px;">
-                    <button onclick="add();" id="btn1" class="btn btn-dark float-left">
-                        <i class="fa fa-plus"></i> Add
+                    <button onclick="add();" id="btn1" class="btn btn-dark float-left todoBtn">
+                        <i class="fa fa-plus"></i> ADD
                     </button>
 
-                    <button onclick="deleteAll();" class="btn btn-warning float-left" id="btn2">
+                    <button onclick="del();" class="btn btn-warning float-left todoBtn" id="btn2">
                         <i class="fa fa-trash"></i> DELETE ALL</button>
                 </div>
             </div>
@@ -94,14 +83,19 @@
     </div>
     <!-- End of Todo App  -->
     <footer>
-        This webpage was made by
-        <strong style="color:rgb(0, 255, 85);">Manal Liaquat</strong>.
+        This app was made by
+        <strong>
+            <a style="color:rgb(0, 0, 0);" href="https://github.com/manalliaquat" target="_blank">Manal Liaquat</a>
+        </strong>.
     </footer>
 
     <script src="js/app.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

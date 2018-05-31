@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sign Up</title>
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="manifest" href="manifest.json">
@@ -34,63 +35,75 @@
 </head>
 
 <body id="body">
-    <div class="container">
-
-
-        <div class="row">
-            <button type="button" class="btn btn-block btn-danger pull-right" onclick="window.location = 'app.html'">Open App</button>
-            <div class="col-md-12">
-                <hr>
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+        <a class="navbar-brand" href="#">TODO APP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            <!-- <button class="btn btn-outline-success float-right" type="">Search</button> -->
+            <button type="button" class="btn btn-danger pull-right navBtn" onclick="window.location = 'app.html'">Open App</button>
+            <a class="btn btn-xs btn-secondary navBtn" href="#" role="button" id="logoutBtn" onclick="logOut()">
+                LOG OUT &ThickSpace;
+                <i class="fa fa-sign-out"></i>
+            </a>
+            <a class="btn btn-xs btn-primary navBtn" href="index.html" role="button" style="display: none;" id="loginBtn">
+                LOG IN &ThickSpace;
+                <i class="fa fa-sign-in"></i>
+            </a>
+        </div>
+    </nav>
+    <div class="container bg-light">
+        <div class="row" id="index" style="display: none;">
+            <div class="col-md-12 col-xs-12">
                 <h1 class="text-center ">REGISTRATION</h1>
                 <br>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="name" class="">Username:</label>
-                        <input type="text" required="required" class="form-control" maxlength="20" placeholder="e.g.   Ali" id="name">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="number" class="">Number</label>
-                        <input type="tel" placeholder="e.g.  03XXxxxxxxx" id="number" maxlength="11" class="form-control">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="password" class="">Password:</label>
-                        <input type="password" required="required" placeholder="**********" id="password" class="form-control">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="email" class="">Email:</label>
-                        <input type="email" required="required" placeholder="e.g.   abc@example.com" class="form-control" id="email">
-                    </div>
-                </div>
-                <br>
-                <button class="btn btn-primary mb-2 btn-lg btn-block" onclick="register();">
+                <label for="name" class="">Username:</label>
+                <input type="text" required="required" class="form-control" maxlength="20" placeholder="e.g.   Ali" id="name">
+                <label for="number" class="">Number: </label>
+                <input type="tel" placeholder="e.g.  03XXxxxxxxx" id="number" maxlength="11" class="form-control">
+                <label for="password" class="">Password:</label>
+                <input type="password" required="required" placeholder="**********" id="password" class="form-control">
+                <label for="email" class="">Email:</label>
+                <input type="email" required="required" placeholder="e.g.   abc@example.com" class="form-control" id="email">
+                <hr>
+                <button class="btn btn-primary mb-2 btn-lg pull-right" onclick="register();">
                     <i class="fa fa-database"></i> SignUp</button>
+                <button class="btn btn-link btn-lg pull-right" onclick="document.getElementById('index').style.display = 'none'; document.getElementById('sign').style.display = 'block'">
+                    Already Signed In?</button>
             </div>
-            <h5 class="text-center" id="msg"></h5>
-            <div class="col-md-12">
-                <h1 class="text-center">
-                    <br>LOG IN</h1>
-                <br>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="email" class="text-light">Email:</label>
-                        <input type="email" required="required" placeholder="e.g.  abc@example.com" class="form-control" id="userEmail">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="password" class="text-light">Password:</label>
-                        <input type="password" required="required" placeholder="**********" id="userPassword" class="form-control">
-                    </div>
-                </div>
-                <br>
-                <button class="btn btn-success btn-lg btn-block" onclick="login();">
-                    <i class="fa fa-sign-in"></i> Login</button>
-                <hr>                
-            </div>
-
+            <br>
+            <br>
         </div>
-    </div>
+        <h5 class="text-center" id="msg"></h5>
+        <div class="col-md-12 col-xs-12" id="sign">
+            <h1 class="text-center">
+                <br>LOG IN</h1>
+            <br>
+            <label for="email">Email:</label>
+            <input type="email" required="required" placeholder="e.g.  abc@example.com" class="form-control" id="userEmail">
+            <label for="password">Password:</label>
+            <input type="password" required="required" placeholder="**********" id="userPassword" class="form-control">
+            <hr>
+            <button class="btn btn-success btn-lg pull-right" onclick="login();">
+                <i class="fa fa-sign-in"></i> Login</button>
+            <button class="btn btn-link mb-2 btn-lg pull-right" onclick="document.getElementById('index').style.display = 'block'; document.getElementById('sign').style.display = 'none'">
+               Not a member?</button>
+            <br>
+            <br>                
+        </div>
 
+    </div>
+    </div>
+    <footer id="footer">
+        This app was made by
+        <strong>
+            <a style="color:rgb(0, 0, 0);" href="https://github.com/manalliaquat" target="_blank">Manal Liaquat</a>
+        </strong>.
+    </footer>
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js')
@@ -100,6 +113,12 @@
         }
     </script>
     <script src="js/registration.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

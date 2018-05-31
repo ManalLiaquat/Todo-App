@@ -26,6 +26,7 @@ ul li{
     padding: 10px;
     /* border: thin dashed black; */
     border-bottom: thin solid black;
+    transition: 1s;    
     /* border-top: thin dotted rgb(31, 31, 31); */
 }
 li span{
@@ -35,7 +36,7 @@ li span{
 button.btn-danger, button.btn-info{
     float: right;
     position: static !important;
-    direction: unset
+    direction: unset;
 }
 
 input[type="checkbox"]{
@@ -55,17 +56,56 @@ input:checked+span {
 }
 
 footer {
-   position: absolute;
+   position: -ms-page;
    bottom:0;
    right: 0;
    left: 0;
+   margin-top: 1rem;
    padding: 1rem;
-   background:rgba(0, 0, 0, 0.459);
+   font-size: 12pt;
+   background:rgba(255, 153, 0, 0.904);
+   text-align: center;
+}
+#footer{
+    position: absolute;
+   bottom:0;
+   right: 0;
+   left: 0;
+   margin-top: 1rem;
+   padding: 1rem;
+   font-size: 12pt;
+   background:rgba(255, 153, 0, 0.904);
    text-align: center;
 }
 
-/* @media(max-width: 750){
+@media(max-width: 950px){
+    .navBtn{
+        /* width: 100%; */
+        margin-top: 10px;
+        float: right;
+    }
+    .todoBtn{
+        /* width: 100%; */
+        text-align: right
+    }
+}
+
+@media(max-width: 750px){
     .navBtn{
         width: 100%;
+        /* margin-top: 10px; */
+        /* float: right; */
     }
-} */
+    .todoBtn{
+        width: 100%;
+        /* text-align: right */
+    }
+}
+#time{
+    padding: 10px
+}
+
+#index{
+    margin: 10px;
+    padding: 10px;
+}

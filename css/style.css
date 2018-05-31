@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Aldrich');
+
 #body{
     background-color: rgb(240, 240, 240);   
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Aldrich', sans-serif;
     font-size: 120%;
     font-weight: 100;
 }
@@ -19,13 +21,16 @@ ul{
 ul li{
     list-style-type: none;
     width: 100%;
-    margin-bottom: 100px;
+    margin-bottom: 10px;
     text-align: left;
     padding: 10px;
-    border: thin dashed black;
+    /* border: thin dashed black; */
+    border-bottom: thin solid black;
+    /* border-top: thin dotted rgb(31, 31, 31); */
 }
 li span{
     margin-left: 10px;
+    font-family: 'Armata', cursive;
 }
 button.btn-danger, button.btn-info{
     float: right;
@@ -40,6 +45,27 @@ input[type="checkbox"]{
 #addedTasks{
     padding: 10px;
     border-radius: 5px;
-    min-height: 520px;
+    min-height: 400px;
     box-shadow: 1px 1px 5px 0.5px black;
 }
+
+input:checked+span {
+    /* background: #F9F9F9; */
+    text-decoration: line-through;
+}
+
+footer {
+   position: absolute;
+   bottom:0;
+   right: 0;
+   left: 0;
+   padding: 1rem;
+   background:rgba(0, 0, 0, 0.459);
+   text-align: center;
+}
+
+/* @media(max-width: 750){
+    .navBtn{
+        width: 100%;
+    }
+} */

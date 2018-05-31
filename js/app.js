@@ -131,14 +131,32 @@ function checkSavedToDos() {
         })
 }
 function deleteAll() {
-    alert("List Cleared!");
+    // alert("List Cleared!");
     for (var i = 0; i < deletekeys.length; i++) {
-        firebase.database().ref("/").child("Todo/AppData/" + deletekeys[i]).remove();
+        firebase.database().ref("/").child("ToDo App/App Data/" + deletekeys[i]).remove();
     }
     document.getElementById("task").innerHTML = "";
     console.log("keys deleted ", deletekeys)
 }
 
+function del(){
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this data!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            deleteAll();
+            swal("Poof! Your data has been deleted!", {
+                icon: "success",
+            });
+        } else {
+            swal("Your data is safe!");
+        }
+    });
+}
 
 
 //start of clock
@@ -148,3 +166,4 @@ function myTimer() {
     document.getElementById("time").innerHTML = d.toLocaleTimeString();
 }
 //end of clock
+

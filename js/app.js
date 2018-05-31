@@ -1,179 +1,143 @@
-function logOut() {
-    firebase.auth().signOut()
-        .then(function (resolve) {
-            window.location.replace("index.html");
-            console.log("Succesfully Signed-Out", resolve);
-        })
-        .catch(function (err) {
-            console.log("Error", err);
-        })
-}
+/* Authentication Details Start */
 
-checkSavedToDos();
-
-const userInput = document.getElementById("val");
-const button = document.getElementById("btn1");
-let toDos = [];
-
-button.addEventListener('click', (event) => {
-    add(userInput);
-});
-
-userInput.addEventListener('keydown', (event) => {
-    if (event.keyCode === 13) {
-        add(userInput);
-    }
-})
-
-let i = 1;
-
-function add(userInp, savedOrNot = 0, itemID = 0) {
-    var item; // todo item
-
-    if (savedOrNot != 0) {
-        item = userInp;
-    }
-    else {
-        item = userInp.value;
-    }
-
-    if (item) {
-        var uid = firebase.auth().currentUser.uid;
-        var itemObj={
-            todo: item,
-            uid: uid
-        };
-        if (!(savedOrNot === "saved")) firebase
-            .database()
-            .ref("/ToDo App/App Data")
-            .push(itemObj);
-
-        if (!itemID) {
-            itemID = "ToDo" + i;
-        }
-
-        i++;
-
-        var incompleteList = document.getElementById("incompleteList");
-        var completedList = document.getElementById("completedlist");
-
-        var li = document.createElement("LI");
-
-        var span = document.createElement("SPAN");
-        span.innerHTML = item;
-        span.setAttribute("class", "col-xs-6");
-
-
-        var btn = document.createElement("BUTTON");
-        btn.setAttribute("class", "btn btn-danger col-sm-2");
-        var btnText = document.createTextNode("Delete");
-        btn.appendChild(btnText);
-
-        var btn1 = document.createElement("BUTTON");
-        btn1.setAttribute("class", "btn btn-info col-sm-2");
-        var btn1Text = document.createTextNode("Edit");
-        btn1.appendChild(btn1Text);
-
-        var checkbox = document.createElement("INPUT");
-        checkbox.setAttribute("type", "checkbox");
-        checkbox.className = "col-xs-2 float-left";
-
-
-        li.appendChild(checkbox);
-        li.appendChild(span);
-        li.appendChild(btn);
-        li.appendChild(btn1);
-        incompleteList.appendChild(li);
-
-        userInput.value = "";
-
-        btn.addEventListener("click", () => { // removing a item from database + DOM
-            firebase
-                .database()
-                .ref("/ToDo App/App Data")
-                .child(itemID)
-                .remove();
-
-            incompleteList.removeChild(btn.parentNode);
-        });
-
-        checkbox.onclick = function () {
-            li.removeChild(checkbox);
-            li.removeChild(btn1);
-            completedList.appendChild(li);
-            incompleteList.removeChild(li);
-        };
-
-        btn.onclick = function () {
-            var li = this.parentNode;
-            var ul = li.parentNode;
-            ul.removeChild(li);
-        };
-
-        btn1.onclick = function () {
-            var li = this.parentNode;
-            var text = prompt("Enter new value");
-            span.innerHTML = text;
-            li.appendChild(checkbox);
-            li.appendChild(btn);
-            li.appendChild(btn1);
-        };
-
-    }
-
-    else {
-        console.log("Please! Enter something in input bar...");
-    }
-
-}
-
-function checkSavedToDos() {
-
-    firebase.database().ref("/ToDo App/App Data").once("value").then(function (data) {
-        var itemID;
-        data.forEach(function (itemData) {
-            itemID = itemData.key;
-        });
-        console.log(itemID);
-        
-        var currentUID = firebase.auth().currentUser.uid;
-        var postObject = data.val();
-        console.log(postObject);
-        var keys = Object.keys(postObject);
-        for (var i = 0; i < keys.length; i++) {
-            var currentObj = postObject[keys[i]];
-            if (currentUID === currentObj.uid){
-                var childID = currentObj.todo;
-            }
-            add(childID,"saved",itemID);
-        }
-    })
-
-}
-firebase.auth().onAuthStateChanged(function (user) {
+var uid;
+firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        var uid = user.uid;
+        email = user.email;
+        uid = user.uid;
+        console.log(email);
         console.log(uid);
-    } else {
+    }
+    else {
         document.getElementById("logoutBtn").style.display = "none";
         document.getElementById("loginBtn").style.display = "inline";
         console.log("Please login to see your todos");
         console.log("User is signed out.\nPlease login!");
     }
-
 });
 
+function logOut() {
+    firebase.auth().signOut()
+        .then(resolve => {
+            window.location.replace("index.html");
+            console.log("Succesfully Signed-Out", resolve);
+        })
+        .catch(error => {
+            console.log("Error", error);
+        });
+};
+/* Authentication Details End*/
 
-function deleteAll() {
-    alert("Are you sure?");
-    firebase
-        .database()
-        .ref("/ToDo App/App Data")
-        .remove();
-    document.getElementById("incompleteList").innerHTML = "";
-    document.getElementById("completedlist").innerHTML = "";
+/* App Start*/
+var val = document.getElementById("val");
+var btn = document.getElementById("btn1");
+btn.addEventListener('click', (event) => {
+    add(val.value);
+    val.value = "";
+});
+val.addEventListener('keydown', (event) => {
+    if (event.keyCode === 13) {
+        add(val.value);
+        val.value = "";
+    }
+});
+
+var deletekeys = []
+let itemID;
+
+function add(currentTodo = "", itemID = 0, save = false) {
+    console.log("received", itemID);
+    var task = document.getElementById("task");
+
+    var li = document.createElement("LI");
+
+    var span = document.createElement("SPAN");
+    // span.setAttribute("class", "col-xs-6");
+
+    var btn = document.createElement("BUTTON");
+    btn.setAttribute("class", "btn btn-danger pull-right");
+    var btnText = "<i class='fa fa-trash-o'></i>";
+    btn.innerHTML = btnText;
+    btn.onclick = function () {
+        var li = this.parentElement;
+        var ul = li.parentElement;
+        ul.removeChild(li);
+        firebase.database().ref("/ToDo App/App Data").child(itemID).remove();
+        console.log("deleted ", itemID, " from database");
+    }
+
+    var btn1 = document.createElement("BUTTON");
+    btn1.setAttribute("class", "btn btn-info pull-right");
+    var btn1Text = "<i class='fa fa-pencil-square-o'></i>";
+    btn1.innerHTML = btn1Text;
+    btn1.onclick = function () {
+        var li = this.parentNode;
+        var text = prompt("Enter new value");
+        li.appendChild(checkbox);
+        li.appendChild(btn);
+        li.appendChild(btn1);
+        span.innerHTML = text;
+    };
+
+    var checkbox = document.createElement("INPUT");
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.className = "float-left";
+
+    var todoValue;
+    if (currentTodo != "") {
+        todoValue = currentTodo;
+    }
+    var obj = {
+        uid: uid,
+        item: todoValue
+    }
+    if (save == false) {
+        itemID = firebase.database().ref("/ToDo App/App Data").push(obj).key;
+        console.log(obj);
+        console.log(itemID)
+        deletekeys.push(itemID);
+    }
+
+    li.appendChild(checkbox);
+    span.innerHTML = todoValue;
+    li.appendChild(span);
+    li.appendChild(btn);
+    li.appendChild(btn1);
+    task.appendChild(li);
 }
-//End of todo app coding
+
+
+checkSavedToDos();
+function checkSavedToDos() {
+    firebase.database().ref("/ToDo App/App Data").once("value")
+        .then(function (result) {
+            var postObject = result.val();
+            var keys = Object.keys(postObject);
+            console.log(keys);
+            for (var i = 0; i < keys.length; i++) {
+                var currentObj = postObject[keys[i]];
+                if (uid == currentObj.uid) {
+                    console.log("current user todo uid", currentObj.uid);
+                    var currTodo = currentObj.item;
+                    if (currTodo != null) {
+                        console.log("key in chectodo function", keys[i]);
+                        deletekeys.push(keys[i]);
+                        add(currTodo, keys[i], true);
+                    }
+                }
+                else
+                    console.log("todo uid not found");
+            }
+        })
+}
+function deleteAll() {
+    alert("List Cleared!");
+    for (var i = 0; i < deletekeys.length; i++) {
+        firebase.database().ref("/").child("Todo/AppData/" + deletekeys[i]).remove();
+    }
+    document.getElementById("task").innerHTML = "";
+    console.log("keys deleted ", deletekeys)
+}
 
 
 

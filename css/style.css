@@ -88,6 +88,9 @@ footer {
         /* width: 100%; */
         text-align: right
     }
+    li span{
+        font-size: 12pt;
+    }
 }
 
 @media(max-width: 750px){
@@ -99,6 +102,9 @@ footer {
     .todoBtn{
         width: 100%;
         /* text-align: right */
+    }
+    li span{
+        font-size: 10pt;
     }
 }
 #time{

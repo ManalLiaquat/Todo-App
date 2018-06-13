@@ -56,7 +56,7 @@ input:checked+span {
 }
 
 footer {
-   position: -ms-page;
+   position: static;
    bottom:0;
    right: 0;
    left: 0;
@@ -67,7 +67,7 @@ footer {
    text-align: center;
 }
 #footer{
-    position: absolute;
+    position: fixed;
    bottom:0;
    right: 0;
    left: 0;

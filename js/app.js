@@ -113,9 +113,12 @@ function checkSavedToDos() {
         .then(function (result) {
             var postObject = result.val();
             var keys = Object.keys(postObject);
+            keys.reverse()
             console.log(keys);
             for (var i = 0; i < keys.length; i++) {
+
                 var currentObj = postObject[keys[i]];
+                console.log(postObject[keys[i]]);
                 if (uid == currentObj.uid) {
                     console.log("current user todo uid", currentObj.uid);
                     var currTodo = currentObj.item;
@@ -139,7 +142,7 @@ function deleteAll() {
     console.log("keys deleted ", deletekeys)
 }
 
-function del(){
+function del() {
     swal({
         title: "Are you sure?",
         text: "Once deleted, you will not be able to recover this data!",
